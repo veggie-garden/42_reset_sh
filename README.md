@@ -7,8 +7,8 @@ Shell script files that download programs and change settings after logout or re
 # Features
 ## after_reset.sh
 - [42header plugin](https://github.com/42Paris/42header)
-    - After installation, the `utils/.vimrc` file will be copied into your home directory. Then your user and mail variable will be set by the declaration in `~/.vimrc`.
-    - 플러그인 설치가 완료되면 `utils/.vimrc` 파일이 홈 디렉토리에 복사됩니다. 그리고 거기에 설정된 user와 mail에 따라 헤더가 출력됩니다.
+    - After installation, it will ask your intra ID and set the header user name and mail by the input.
+    - 플러그인 설치가 완료되면 인트라 ID를 입력받고 자동으로 헤더 이름과 메일을 설정해줍니다.
 - [42toolbox](https://github.com/alexandregv/42toolbox)
 - ssh key
     - This command checks the existence of the SSH key (create it when it does not exist) and copies the public key into your clipboard. Your GitHub and 42 intra SSH key setting page will be opened automatically after that.
