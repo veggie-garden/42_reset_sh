@@ -27,7 +27,7 @@ Download this repo by zip in anywhere you want, and run `./after_reset`.
 - `dockutil` (brew install dockutil)
     - After installation, your dock will be changed. If you want more or fewer applications to be in your dock, please add or remove the path in `after_reset.sh`. `dockutil` will be deleted after setting.
     - 설치 이후 dock이 설정된 대로 변경됩니다. 만약 더 많은 혹은 적은 어플리케이션이 dock에 있길 원한다면 `# Change the path if you want more/fewer applications to be in your dock` 부분을 찾아서 설정을 변경하세요. 모든 설정이 설정된 후 dockutil은 자동으로 삭제됩니다.  
-<img width="1095" alt="Screen Shot 2022-08-19 at 4 07 32 PM" src="https://user-images.githubusercontent.com/63505022/185574095-d30c2968-213d-413f-9400-b469b0065529.png">
+<img width="1201" alt="image" src="https://user-images.githubusercontent.com/63505022/185591957-317b0977-27b5-4b08-8d56-7790160dcef9.png">
 
 ## after_logout.sh
 COMING SOON
