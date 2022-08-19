@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+      <!-- 아래의 스트링에는 유니크한 ID가 들어가야 합니다! 간단하게는 파일 이름을 적을 수 있습니다. -->
+    <string>LoginScripts.sh</string>
+    <key>ProgramArguments</key>
+    <array>
+          <!-- 실행할 스크립트의 절대경로를 적습니다. -->
+        <string>/Users/cheseo/~/Library/LaunchAgents/LoginScripts.plist</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>
