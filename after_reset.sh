@@ -72,24 +72,21 @@ echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	read -p "${YELLOW}Where do you want to install it? (g for goinfre / h for home / or insert the path${NC} ${LRED}[the folder will be created under your home directory]${NC}${YELLOW})${NC} " input
 	if [ -n "$input" ] && [ "$input" = "g" ]; then
-		brewFolder="$HOME/goinfre"
-		brewPath="$HOME/goinfre/.brew"
+		brewPath="$HOME/goinfre"
 	elif [ -n "$input" ] && [ "$input" = "h" ]; then
-		brewFolder="$HOME"
-		brewPath="$HOME/.brew"
+		brewPath="$HOME"
 	elif [ -n "$input" ]; then
-		brewFolder="$HOME/$input"
-		brewPath="$HOME/$input/.brew"
+		brewPath="$HOME/$input"
 	else
 		echo "⚠️  ${LRED}invalid path, exiting :(${NC} ⚠️ "
 		exit 1
 	fi
 	if [[ -x $brewPath/.brew ]]; then
-		echo "${LCYAN}brew already installed in${NC} ${W}$brewFolder${NC}"
+		echo "${LCYAN}brew already installed in${NC} ${W}$brewPath${NC}"
 	else
-		echo "💾 ${LCYAN}brew will be installed in${NC} ${W}$brewFolder${NC} 💾"
+		echo "💾 ${LCYAN}brew will be installed in${NC} ${W}$brewPath${NC} 💾"
 		#echo "export brewPath=${brewPath}" >> $HOME/.zshrc
-		git clone --depth=1 https://github.com/Homebrew/brew $brewPath && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
+		git clone --depth=1 https://github.com/Homebrew/brew $brewPath/.brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
 		echo "${LGREEN}Done :D${NC}"
 	fi
 else
@@ -168,7 +165,7 @@ fi
 read -n1 -p "${YELLOW}Do you want to remove brew? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
-	rm -rf $brewFolder
+	rm -rf $brewPath/.brew
 	echo "${LGREEN}Done :D${NC}"
 else
 	echo "${LGREEN}OK :D${NC}"
