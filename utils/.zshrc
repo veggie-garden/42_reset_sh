@@ -7,9 +7,6 @@ alias rmc='rm -r ~/Library/Caches/*; rm ~/.zcompdump*; brew cleanup'
 
 alias francinette=/Users/cheseo/francinette/tester.sh
 alias paco=/Users/cheseo/francinette/tester.sh
-export PATH=$HOME/.brew/bin:$PATH
-
-export PATH=/opt/homebrew/bin:$PATH
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -30,10 +27,10 @@ fi
 
 PROMPT='%{$fg_bold[cyan]%}$ZSH_THEME_CLOUD_PREFIX %{$fg_bold[green]%} %{$fg[green]%}%c %{$fg_bold[cyan]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
-ZSH_THEME_GIT_PROMPT_PREFIX='%{$fg[green]%}[%{$fg[cyan]%}]'
-ZSH_THEME_GIT_PROMPT_SUFFIX='%{$reset_color%}'
-ZSH_THEME_GIT_PROMPT_DIRTY='[%{$fg[green]%}] [%{$fg[yellow]%}%✨%{$reset_color%}]'
-ZSH_THEME_GIT_PROMPT_CLEAN='[%{$fg[green]%}]'
+#ZSH_THEME_GIT_PROMPT_PREFIX='%{$fg[green]%}[%{$fg[cyan]%}]'
+#ZSH_THEME_GIT_PROMPT_SUFFIX='%{$reset_color%}'
+#ZSH_THEME_GIT_PROMPT_DIRTY='[%{$fg[green]%}] [%{$fg[yellow]%}%✨%{$reset_color%}]'
+#ZSH_THEME_GIT_PROMPT_CLEAN='[%{$fg[green]%}]'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
