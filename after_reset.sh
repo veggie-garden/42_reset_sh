@@ -6,7 +6,7 @@
 #    By: cheseo <cheseo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2022/08/19 17:24:10 by cheseo           ###   ########.fr        #
+#    Updated: 2022/08/19 17:27:33 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ else
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
 		read -p "${YELLOW}insert your intra ID:${NC} " username
 		if [ -n "$input" ]; then
-			echo "let g:user42 = $username" >> ~/.vimrc
-			echo "let g:mail42 = $username@student.42seoul.kr" >> ~/.vimrc
+			echo "let g:user42 = '$username'" >> ~/.vimrc
+			echo "let g:mail42 = '$username@student.42seoul.kr'" >> ~/.vimrc
 		else
 			echo "⚠️  ${LRED}invalid input, failed to set user and mail for 42header plugin :(${NC} ⚠️ "
 		fi
