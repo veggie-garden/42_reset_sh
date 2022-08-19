@@ -6,7 +6,7 @@
 #    By: cheseo <cheseo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2022/08/19 15:39:06 by cheseo           ###   ########.fr        #
+#    Updated: 2022/08/19 16:57:45 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,8 @@ if [ -n "$input" ] && [ "$input" = "y" ]; then
 		echo "${LCYAN}brew already installed in${NC} ${W}$brewPath${NC}"
 	else
 		echo "💾 ${LCYAN}brew will be installed in${NC} ${W}$brewPath${NC} 💾"
-		git clone --depth=1 https://github.com/Homebrew/brew $brewPath/.brew && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
+		#echo "export brewPath=${brewPath}" >> $HOME/.zshrc
+		git clone --depth=1 https://github.com/Homebrew/brew $brewPath/.brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
 		echo "${LGREEN}Done :D${NC}"
 	fi
 else

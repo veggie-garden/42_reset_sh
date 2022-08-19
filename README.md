@@ -21,7 +21,7 @@ Shell script files that download programs and change settings after logout or re
     - `tree`는 파일 구조를 아래의 사진과 같이 출력해서 보여주는 명령어입니다. tree를 사용하려면 brew가 필요합니다.
 - `dockutil` (brew install dockutil)
     - After installation, your dock will be changed. If you want more or fewer applications to be in your dock, please add or remove the path in `after_reset.sh`. `dockutil` will be deleted after setting.
-    - 설치 이후 dock이 설정된대로 변경됩니다. 만약 더 많은 혹은 적은 어플리케이션이 dock에 있길 원한다면 `# Change the path if you want more/fewer applications to be in your dock` 부분을 찾아서 설정을 변경하세요. 모든 설정이 설정된 후 dockutil은 자동으로 삭제됩니다.
+    - 설치 이후 dock이 설정된 대로 변경됩니다. 만약 더 많은 혹은 적은 어플리케이션이 dock에 있길 원한다면 `# Change the path if you want more/fewer applications to be in your dock` 부분을 찾아서 설정을 변경하세요. 모든 설정이 설정된 후 dockutil은 자동으로 삭제됩니다.
 
 ## after_logout.sh
 COMING SOON
