@@ -1,16 +1,16 @@
-#/usr/bin/env bash
-
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    resetting.sh                                       :+:      :+:    :+:    #
+#    after_reset.sh                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: cheseo <cheseo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2022/08/19 12:36:45 by cheseo           ###   ########.fr        #
+#    Updated: 2022/08/19 15:39:06 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#/usr/bin/env bash
 
 LRED=$'\033[1;31m'
 LCYAN=$'\033[1;36m'
@@ -19,7 +19,7 @@ YELLOW=$'\033[1;33m'
 W=$'\033[1;37m'
 NC=$'\033[0m'
 
-# 42 header
+# install 42 header
 if [[ -x $HOME/.vim/plugin ]]; then
 	echo "${LCYAN}42header plugin already installed"
 else
@@ -33,7 +33,7 @@ else
 	fi
 fi
 
-# download 42toolbox
+# install 42toolbox
 if [[ -x $HOME/42toolbox ]]; then
         echo "${LCYAN}42toolbox already installed${NC}"
 else
@@ -57,11 +57,11 @@ else
 	echo "${LRED}OK :(${NC}"
 fi
 
-# install brew in goinfre
+# install brew
+rm -rf $HOME/goinfre/.brew
 read -n1 -p "${YELLOW}If you want to change your dock, you have to install brew. Do you want to install brew? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
-	rm -rf $HOME/goinfre/.brew
 	read -p "${YELLOW}Where do you want to install it? (g for goinfre / h for home / or insert the path${NC} ${LRED}[the folder will be created under your home directory]${NC}${YELLOW})${NC} " input
 	if [ -n "$input" ] && [ "$input" = "g" ]; then
 		brewPath="$HOME/goinfre"
@@ -114,7 +114,7 @@ else
 	fi
 fi
 
-# Path
+# Change the path if you want more/less applications to be in your dock
 apps=(
 "/System/Applications/Launchpad.app"
 "/Applications/Google Chrome.app"
@@ -148,5 +148,14 @@ echo "🥳 ${LGREEN}Finished creating default Dock${NC} 🥳"
 # uninstall dockutil
 echo "${LGREEN}removing dockutil${NC}"
 brew uninstall dockutil
+
+read -n1 -p "${YELLOW}Do you want to remove brew? (y/n)${NC} " input
+echo ""
+if [ -n "$input" ] && [ "$input" = "y" ]; then
+	rm -rf $brewPath/.brew
+	echo "${LGREEN}Done :D${NC}"
+else
+	echo "${LGREEN}OK :D${NC}"
+fi
 
 echo "🎉 ${LCYAN}Setting Finished ${NC} 🎉"
