@@ -1,6 +1,6 @@
 # Reset.sh
-Shell script files that download programs and change settings after logout or resetting your 42 Mac.   
-로그아웃 또는 초기화 이후에 필요한 프로그램을 다운하고 재설정해 주는 쉘스크립트 파일입니다.   
+Shell script files that download programs and change settings after resetting your 42 Mac.   
+초기화 이후에 필요한 프로그램을 다운하고 설정을 변경해 주는 쉘스크립트 파일입니다.   
 
 > **__Pull requests, and error reports are all welcomed.__** 
 
