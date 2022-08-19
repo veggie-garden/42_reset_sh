@@ -66,7 +66,7 @@ else
 fi
 
 # install brew
-rm -rf $HOME/goinfre/.brew
+rm -rf $HOME/goinfre/brew
 read -n1 -p "${YELLOW}If you want to change your dock, you have to install brew. Do you want to install brew? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
@@ -81,12 +81,12 @@ if [ -n "$input" ] && [ "$input" = "y" ]; then
 		echo "⚠️  ${LRED}invalid path, exiting :(${NC} ⚠️ "
 		exit 1
 	fi
-	if [[ -x $brewPath/.brew ]]; then
+	if [[ -x $brewPath/brew ]]; then
 		echo "${LCYAN}brew already installed in${NC} ${W}$brewPath${NC}"
 	else
 		echo "💾 ${LCYAN}brew will be installed in${NC} ${W}$brewPath${NC} 💾"
-		git clone --depth=1 https://github.com/Homebrew/brew $brewPath/.brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
 		#echo "export brewPath=${brewPath}" >> $HOME/.zshrc
+		git clone --depth=1 https://github.com/Homebrew/brew $brewPath/brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
 		echo "${LGREEN}Done :D${NC}"
 	fi
 else
@@ -95,7 +95,7 @@ else
 fi
 
 # install tree
-if [[ -x $brewPath/.brew/bin/tree ]]; then
+if [[ -x $brewPath/brew/bin/tree ]]; then
 	echo "${LCYAN}tree already installed${NC}"
 else
 	read -n1 -p "${YELLOW}Do you want to install tree? (y/n)${NC} " input
@@ -109,7 +109,7 @@ else
 fi
 
 # [set dock](https://appleshare.it/posts/use-dockutil-in-a-script/)
-if [[ -x $brewPath/.brew/bin/dockutil ]]; then
+if [[ -x $brewPath/brew/bin/dockutil ]]; then
 	echo "${LCYAN}dockutil already installed${NC}"
 else
 	read -n1 -p "${YELLOW}Do you want to install dockutil to change your dock? (y/n)${NC} " input
@@ -133,14 +133,12 @@ apps=(
 "/System/Applications/System Preferences.app"
 )
 
-# Create a clean Dock
-if [[ -x $brewPath/.brew/bin/dockutil ]]; then
+if [[ -x $brewPath/brew/bin/dockutil ]]; then
+	# Create a clean Dock
 	dockutil --remove all --no-restart
 	echo "🧹 ${LGREEN}clean-out the Dock${NC}"
-fi
 
-# Loop to check whether App is installed or not"
-if [[ -x $brewPath/.brew/bin/dockutil ]]; then
+	# Loop to check whether App is installed or not"
 	for app in "${apps[@]}";
 	do
 		if [[ -e ${app} ]]; then
@@ -149,14 +147,13 @@ if [[ -x $brewPath/.brew/bin/dockutil ]]; then
 			echo "${app} not installed"
 		fi
 	done
-fi
 
-
-if [[ -x $brewPath/.brew/bin/dockutil ]]; then
 	# Kill dock to use new settings
 	killall -KILL Dock
 	echo "🏁 ${LGREEN}Restarted the Dock${NC}"
+
 	echo "🥳 ${LGREEN}Finished creating default Dock${NC} 🥳"
+
 	# uninstall dockutil
 	echo "${LGREEN}removing dockutil${NC}"
 	brew uninstall dockutil
@@ -165,7 +162,7 @@ fi
 read -n1 -p "${YELLOW}Do you want to remove brew? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
-	rm -rf $brewPath/.brew
+	rm -rf $brewPath/brew
 	echo "${LGREEN}Done :D${NC}"
 else
 	echo "${LGREEN}OK :D${NC}"
