@@ -161,7 +161,7 @@ brew uninstall dockutil
 read -n1 -p "${YELLOW}Do you want to remove brew? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
-	rm -rf $brewPath
+	rm -rf $brewPath/.brew
 	echo "${LGREEN}Done :D${NC}"
 else
 	echo "${LGREEN}OK :D${NC}"
