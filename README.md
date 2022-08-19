@@ -4,6 +4,9 @@ Shell script files that download programs and change settings after resetting yo
 
 > **__Pull requests, and error reports are all welcomed.__** 
 
+# Install
+Clone this repo anywhere you want, and run `./after_reset`.
+
 # Features
 ## after_reset.sh
 - [42header plugin](https://github.com/42Paris/42header)
