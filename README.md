@@ -5,8 +5,8 @@ Shell script files that download programs and change settings after resetting yo
 > **__Pull requests, and error reports are all welcomed.__** 
 
 # Install
-Clone this repo anywhere you want, and run `./after_reset`.
-원하는 곳에 이 레포를 클론하고 `./after_reset`으로 파일을 실행해주세요.
+Download this repo by zip in anywhere you want, and run `./after_reset`.
+원하는 곳에 이 레포를 zip으로 다운 받은 뒤 `./after_reset`으로 파일을 실행해주세요.
 
 # Features
 ## after_reset.sh
