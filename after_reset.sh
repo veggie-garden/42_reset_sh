@@ -121,8 +121,7 @@ else
 		brew install dockutil
 		echo "${LGREEN}Done :D${NC}"
 	else
-		echo "⚠️  ${LRED}dockutil not installed, exiting :(${NC} ⚠️  "
-		exit 1
+		echo "${LRED}dockutil not installed :(${NC}"
 	fi
 fi
 
@@ -138,28 +137,33 @@ apps=(
 )
 
 # Create a clean Dock
-dockutil --remove all --no-restart
-echo "🧹 ${LGREEN}clean-out the Dock${NC}"
+if [[ -x $brewPath/.brew/bin/dockutil ]]; then
+	dockutil --remove all --no-restart
+	echo "🧹 ${LGREEN}clean-out the Dock${NC}"
+fi
 
 # Loop to check whether App is installed or not"
-for app in "${apps[@]}";
-do
-	if [[ -e ${app} ]]; then
-		dockutil --add "$app" --no-restart;
-	else
-		echo "${app} not installed"
-	fi
-done
+if [[ -x $brewPath/.brew/bin/dockutil ]]; then
+	for app in "${apps[@]}";
+	do
+		if [[ -e ${app} ]]; then
+			dockutil --add "$app" --no-restart;
+		else
+			echo "${app} not installed"
+		fi
+	done
+fi
 
-# Kill dock to use new settings
-killall -KILL Dock
-echo "🏁 ${LGREEN}Restarted the Dock${NC}"
 
-echo "🥳 ${LGREEN}Finished creating default Dock${NC} 🥳"
-
-# uninstall dockutil
-echo "${LGREEN}removing dockutil${NC}"
-brew uninstall dockutil
+if [[ -x $brewPath/.brew/bin/dockutil ]]; then
+	# Kill dock to use new settings
+	killall -KILL Dock
+	echo "🏁 ${LGREEN}Restarted the Dock${NC}"
+	echo "🥳 ${LGREEN}Finished creating default Dock${NC} 🥳"
+	# uninstall dockutil
+	echo "${LGREEN}removing dockutil${NC}"
+	brew uninstall dockutil
+fi
 
 read -n1 -p "${YELLOW}Do you want to remove brew? (y/n)${NC} " input
 echo ""
