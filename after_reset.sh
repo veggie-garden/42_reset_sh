@@ -85,8 +85,8 @@ if [ -n "$input" ] && [ "$input" = "y" ]; then
 		echo "${LCYAN}brew already installed in${NC} ${W}$brewPath${NC}"
 	else
 		echo "💾 ${LCYAN}brew will be installed in${NC} ${W}$brewPath${NC} 💾"
-		#echo "export brewPath=${brewPath}" >> $HOME/.zshrc
 		git clone --depth=1 https://github.com/Homebrew/brew $brewPath/.brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
+		#echo "export brewPath=${brewPath}" >> $HOME/.zshrc
 		echo "${LGREEN}Done :D${NC}"
 	fi
 else
