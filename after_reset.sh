@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2022/08/19 17:27:33 by cheseo           ###   ########.fr        #
+#    Updated: 2022/08/23 11:23:43 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,6 +131,7 @@ apps=(
 "/Applications/iTerm.app"
 "/System/Applications/Notes.app"
 "/System/Applications/System Preferences.app"
+"${HOME}/Downloads"
 )
 
 if [[ -x $brewPath/brew/bin/dockutil ]]; then
@@ -144,7 +145,7 @@ if [[ -x $brewPath/brew/bin/dockutil ]]; then
 		if [[ -e ${app} ]]; then
 			dockutil --add "$app" --no-restart;
 		else
-			echo "${app} not installed"
+			echo "${LRED}${app} not installed${NC}"
 		fi
 	done
 
