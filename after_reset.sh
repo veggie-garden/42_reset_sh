@@ -5,10 +5,10 @@
 #                                                         :::      ::::::::    #
 #    after_reset.sh                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cheseo <cheseo@student.42.fr>              +#+  +:+       +#+         #
+#    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2022/08/23 11:23:43 by cheseo           ###   ########.fr        #
+#    Updated: 2022/09/13 17:16:55 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,19 +23,33 @@ echo "${W}Welcome to is reset_sh${NC}🥕"
 
 # install 42 header
 if [[ -x $HOME/.vim/plugin ]]; then
-	echo "${LCYAN}42header plugin already installed"
+	echo "${LCYAN}42header plugin already installed${NC}"
+	read -n1 -p "${YELLOW}Do you want to change intra ID for header? (y/n)${NC} " input
+	echo ""
+	if [ -n "$input" ] && [ "$input" = "y" ]; then
+		read -p "${YELLOW}insert your intra ID:${NC} " username
+		if [ -n "$username" ]; then
+			echo "let g:user42 = '$username'" >> ~/.vimrc
+			echo "let g:mail42 = '$username@student.42seoul.kr'" >> ~/.vimrc
+			sh ./set_header.sh
+		else
+			echo "⚠️  ${LRED}invalid input, failed to set user and mail for 42header plugin :(${NC} ⚠️ "
+		fi
+	else
+		echo "${LGREEN}OK :)${NC}"
+	fi
 else
 	read -n1 -p "${YELLOW}Do you want to install 42header plugin? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
 		read -p "${YELLOW}insert your intra ID:${NC} " username
-		if [ -n "$input" ]; then
+		if [ -n "$username" ]; then
 			echo "let g:user42 = '$username'" >> ~/.vimrc
 			echo "let g:mail42 = '$username@student.42seoul.kr'" >> ~/.vimrc
+			sh ./set_header.sh
 		else
 			echo "⚠️  ${LRED}invalid input, failed to set user and mail for 42header plugin :(${NC} ⚠️ "
 		fi
-		./set_header.sh
 	else
 		echo "${LRED}OK :(${NC}"
 	fi
@@ -169,4 +183,4 @@ else
 	echo "${LGREEN}OK :D${NC}"
 fi
 
-echo "🎉 ${LCYAN}Setting Finished ${NC} 🎉"
+echo "🎉 ${LCYAN}Setting Finished ${NC}🎉"
