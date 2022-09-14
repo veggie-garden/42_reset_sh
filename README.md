@@ -19,6 +19,7 @@ After reset your mac by `touch ~/.reset`, download this repo by zip in anywhere 
 - [42header plugin](https://github.com/42Paris/42header)
     - After installation, it will ask your intra ID and set the header user name and mail by the input.
     - 플러그인 설치가 완료되면 인트라 ID를 입력받고 자동으로 헤더 이름과 메일을 설정해줍니다.
+	- Able to reset your intra id. 인트라 ID 재설정 가능. (Sep 14th 2022 update)  
 - [42toolbox](https://github.com/alexandregv/42toolbox)
 - ssh key
     - This command checks the existence of the SSH key (create it when it does not exist) and copies the public key into your clipboard. Your GitHub and 42 intra SSH key setting page will be opened automatically after that.
