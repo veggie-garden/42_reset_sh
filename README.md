@@ -38,3 +38,23 @@ After reset your mac by `touch ~/.reset`, download this repo by zip in anywhere 
 
 ## after_logout.sh
 COMING SOON
+
+# Troubleshooting
+## Case 1:
+I've tried to run brew, but I got this message / brew를 실행했으나 아래와 같은 메세지가 뜹니다:   
+```
+zsh: command not found: brew
+```  
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/63505022/191436097-fcf9b24e-7e02-4623-9ed7-3c0aae6324af.png"> 
+
+## Case 2:
+If you've installed `oh-my-zsh`, you will see this message when you installing brew / `oh-my-zsh`가 설치되어 있다면 brew를 설치할 때 아래와 같은 에러 메시지가 뜹니다 : 
+```
+Error: Oh My Zsh can't be loaded from: sh. You need to run zsh instead.
+```
+
+## Solution 1 & 2:
+Try this command below in your terminal / 아래의 명령어를 실행하세요:  
+```
+source ~/.zshrc
+```
