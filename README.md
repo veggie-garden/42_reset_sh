@@ -48,7 +48,7 @@ zsh: command not found: brew
 <img width="600" alt="image" src="https://user-images.githubusercontent.com/63505022/191436097-fcf9b24e-7e02-4623-9ed7-3c0aae6324af.png"> 
 
 ## Case 2:
-If you've installed `oh-my-zsh`, you will see this message when you installing brew / `oh-my-zsh`가 설치되어 있다면 brew를 설치할 때 아래와 같은 에러 메시지가 뜹니다 : 
+If you've installed `oh-my-zsh`, you will see this message when you running shell script file / `oh-my-zsh`가 설치되어 있다면 아래와 같은 에러 메시지가 sh 파일을 실행할 때 뜹니다 : 
 ```
 Error: Oh My Zsh can't be loaded from: sh. You need to run zsh instead.
 ```
