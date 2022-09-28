@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2022/09/13 17:16:55 by cheseo           ###   ########.fr        #
+#    Updated: 2022/09/28 13:31:39 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,37 +22,21 @@ NC=$'\033[0m'
 echo "${W}Welcome to is reset_sh${NC}🥕"
 
 # install 42 header
-if [[ -x $HOME/.vim/plugin ]]; then
-	echo "${LCYAN}42header plugin already installed${NC}"
-	read -n1 -p "${YELLOW}Do you want to change intra ID for header? (y/n)${NC} " input
-	echo ""
-	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		read -p "${YELLOW}insert your intra ID:${NC} " username
-		if [ -n "$username" ]; then
-			echo "let g:user42 = '$username'" >> ~/.vimrc
-			echo "let g:mail42 = '$username@student.42seoul.kr'" >> ~/.vimrc
-			sh ./utils/set_header.sh
-		else
-			echo "⚠️  ${LRED}invalid input, failed to set user and mail for 42header plugin :(${NC} ⚠️ "
-		fi
+read -n1 -p "${YELLOW}Do you want to change intra ID for header? (y/n)${NC} " input
+echo ""
+if [ -n "$input" ] && [ "$input" = "y" ]; then
+	read -p "${YELLOW}insert your intra ID:${NC} " username
+	if [ -n "$username" ]; then
+		echo "export USER='$username'" >> $HOME/.zshrc
+		echo "export MAIL='$username@student.42seoul.kr'" >> $HOME/.zshrc
+		echo "let g:user42 = '$username'" >> $HOME/.vimrc
+		echo "let g:mail42 = '$username@student.42seoul.kr'" >> $HOME/.vimrc
+		source ~/.zshrc
 	else
-		echo "${LGREEN}OK :)${NC}"
+		echo "⚠️  ${LRED}invalid input, failed to set user and mail for 42header :(${NC} ⚠️ "
 	fi
 else
-	read -n1 -p "${YELLOW}Do you want to install 42header plugin? (y/n)${NC} " input
-	echo ""
-	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		read -p "${YELLOW}insert your intra ID:${NC} " username
-		if [ -n "$username" ]; then
-			echo "let g:user42 = '$username'" >> ~/.vimrc
-			echo "let g:mail42 = '$username@student.42seoul.kr'" >> ~/.vimrc
-			sh ./utils/set_header.sh
-		else
-			echo "⚠️  ${LRED}invalid input, failed to set user and mail for 42header plugin :(${NC} ⚠️ "
-		fi
-	else
-		echo "${LRED}OK :(${NC}"
-	fi
+	echo "${LRED}OK :(${NC}"
 fi
 
 # install 42toolbox

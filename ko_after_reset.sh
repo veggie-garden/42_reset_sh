@@ -22,37 +22,21 @@ NC=$'\033[0m'
 echo "${W}Welcome to is reset_sh${NC}🥕"
 
 # install 42 header
-if [[ -x $HOME/.vim/plugin ]]; then
-	echo "${LCYAN}42header 플러그인이 이미 설치되어 있습니다.${NC}"
-	read -n1 -p "${YELLOW}인트라 ID를 변경하고 싶습니까? (y/n)${NC} " input
-	echo ""
-	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		read -p "${YELLOW}인트라 ID를 입력해주세요:${NC} " username
-		if [ -n "$username" ]; then
-			echo "let g:user42 = '$username'" >> ~/.vimrc
-			echo "let g:mail42 = '$username@student.42seoul.kr'" >> ~/.vimrc
-			sh ./utils/set_header.sh
-		else
-			echo "⚠️  ${LRED}유효하지 않은 입력으로 헤더 설정에 실패했습니다 :(${NC} ⚠️ "
-		fi
+read -n1 -p "${YELLOW}인트라 ID를 변경하고 싶습니까? (y/n)${NC} " input
+echo ""
+if [ -n "$input" ] && [ "$input" = "y" ]; then
+	read -p "${YELLOW}인트라 ID를 입력해주세요:${NC} " username
+	if [ -n "$username" ]; then
+		echo "export USER='$username'" >> $HOME/.zshrc
+		echo "export MAIL='$username@student.42seoul.kr'" >> $HOME/.zshrc
+		echo "let g:user42 = '$username'" >> ~/.vimrc
+		echo "let g:mail42 = '$username@student.42seoul.kr'" >> ~/.vimrc
+		source ~/.zshrc
 	else
-		echo "${LGREEN}OK :)${NC}"
+		echo "⚠️  ${LRED}유효하지 않은 입력으로 헤더 설정에 실패했습니다 :(${NC} ⚠️ "
 	fi
 else
-	read -n1 -p "${YELLOW}42헤더 플러그인을 설치할까요? (y/n)${NC} " input
-	echo ""
-	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		read -p "${YELLOW}인트라 ID를 입력해주세요:${NC} " username
-		if [ -n "$username" ]; then
-			echo "let g:user42 = '$username'" >> ~/.vimrc
-			echo "let g:mail42 = '$username@student.42seoul.kr'" >> ~/.vimrc
-			sh ./utils/set_header.sh
-		else
-			echo "⚠️  ${LRED}유효하지 않은 입력으로 헤더 설정에 실패했습니다 :(${NC} ⚠️ "
-		fi
-	else
-		echo "${LRED}OK :(${NC}"
-	fi
+	echo "${LRED}OK :(${NC}"
 fi
 
 # install 42toolbox
