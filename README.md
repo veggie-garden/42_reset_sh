@@ -5,11 +5,11 @@ Shell script files that download programs and change settings after resetting yo
 > **__Pull requests, and error reports are all welcomed.__** 
 
 # Install
-After reset your mac by `touch ~/.reset`, download this repo by zip in anywhere you want, and run `./after_reset`.  
+After reset your mac by `touch ~/.reset`, clone this repo in anywhere you want, and run `./after_reset`.  
 ```diff
 - ⚠️ PLEASE BACKUP ALL YOUR FILES BEFORE YOU USE `touch ~/.reset` COMMAND ⚠️
 ```
-`touch ~/.reset`으로 맥 초기화를 진행한 후에, 원하는 곳에 이 레포를 zip으로 다운 받은 뒤 `./after_reset`으로 파일을 실행해주세요.
+`touch ~/.reset`으로 맥 초기화를 진행한 후에, 원하는 곳에 이 레포를 clone한 뒤에 `./after_reset`으로 파일을 실행해주세요.
 ```diff
 - ⚠️ `touch ~/.reset` 명령어는 맥을 초기화해주는 명령어입니다. 사용하시기 전에 모든 파일을 백업해두고 사용하세요! ⚠️
 ```
