@@ -101,6 +101,7 @@ else
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
 		brew install tree
 		echo "${LGREEN}Done :D${NC}"
+		source $HOME/.zshrc
 	else
 		echo "${LRED}tree가 설치되지 않았습니다 :(${NC}"
 	fi
