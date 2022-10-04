@@ -31,7 +31,7 @@ if [ -n "$input" ] && [ "$input" = "y" ]; then
 		echo "export MAIL='$username@student.42seoul.kr'" >> $HOME/.zshrc
 		echo "let g:user42 = '$username'" >> $HOME/.vimrc
 		echo "let g:mail42 = '$username@student.42seoul.kr'" >> $HOME/.vimrc
-		source ~/.zshrc
+		source $HOME/.zshrc
 	else
 		echo "⚠️  ${LRED}invalid input, failed to set user and mail for 42header :(${NC} ⚠️ "
 	fi
@@ -116,6 +116,7 @@ else
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
 		brew install dockutil
 		echo "${LGREEN}Done :D${NC}"
+		source $HOME/.zshrc
 	else
 		echo "${LRED}dockutil not installed :(${NC}"
 	fi
