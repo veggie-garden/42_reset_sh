@@ -27,12 +27,12 @@ echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	read -p "${YELLOW}인트라 ID를 입력해주세요:${NC} " username
 	if [ -n "$username" ]; then
+		echo "" >> $HOME/.zshrc
 		echo "# 42header setting" >> $HOME/.zshrc
 		echo "export USER='$username'" >> $HOME/.zshrc
 		echo "export MAIL='$username@student.42seoul.kr'" >> $HOME/.zshrc
 		echo "let g:user42 = '$username'" >> $HOME/.vimrc
 		echo "let g:mail42 = '$username@student.42seoul.kr'" >> $HOME/.vimrc
-		echo "" >> $HOME/.zshrc
 		source $HOME/.zshrc 2>/dev/null
 		echo "${LGREEN}Done :D${NC}"
 	else
@@ -89,10 +89,10 @@ else
 			echo "${LCYAN}brew는 이미${NC} ${W}$brewPath${NC}에 설치되어 있습니다."
 		else
 			echo "💾 ${LCYAN}brew 위치: ${NC} ${W}$brewPath${NC} 💾"
+			echo "" >> $HOME/.zshrc
 			echo "# brew" >> $HOME/.zshrc
 			git clone --depth=1 https://github.com/Homebrew/brew $brewPath/.brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc 2>/dev/null && brew update
 			brewPath="$(brew --prefix)"
-			echo "" >> $HOME/.zshrc
 			source $HOME/.zshrc 2>/dev/null
 			echo "${LGREEN}Done :D${NC}"
 		fi
@@ -186,7 +186,8 @@ fi
 read -n1 -p "${YELLOW}\"code .\" 명령어를 사용하시겠습니까? 터미널에서 vscode를 열어주는 명령어입니다. (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
-	echo "# run vscode in terminal"
+	echo "" >> $HOME/.zshrc
+	echo "# run vscode in terminal" >> $HOME/.zshrc
 	echo "code () { VSCODE_CWD=\"\$PWD\" open -n -b \"com.microsoft.VSCode\" --args $* ;}" >> $HOME/.zshrc
 	source $HOME/.zshrc 2>/dev/null
 	echo "${LGREEN}Done :D${NC}"
