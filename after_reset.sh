@@ -198,3 +198,4 @@ fi
 
 source $HOME/.zshrc 2>/dev/null
 echo "🎉 ${LCYAN}Setting Finished ${NC}🎉"
+exec zsh -l
