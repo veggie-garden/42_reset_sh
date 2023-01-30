@@ -85,7 +85,7 @@ else
 			echo "⚠️  ${LRED}유효하지 않은 경로임으로 종료합니다 :(${NC} ⚠️ "
 			exit 1
 		fi
-		if [[ -x $brewPath/brew ]]; then
+		if [[ -x $brewPath/.brew ]]; then
 			echo "${LCYAN}brew는 이미${NC} ${W}$brewPath${NC}에 설치되어 있습니다."
 		else
 			echo "💾 ${LCYAN}brew 위치: ${NC} ${W}$brewPath${NC} 💾"
