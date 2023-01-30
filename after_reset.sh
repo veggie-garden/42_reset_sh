@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2022/09/28 13:31:39 by cheseo           ###   ########.fr        #
+#    Updated: 2023/01/30 15:45:09 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ if [ -n "$input" ] && [ "$input" = "y" ]; then
 		echo "export MAIL='$username@student.42seoul.kr'" >> $HOME/.zshrc
 		echo "let g:user42 = '$username'" >> $HOME/.vimrc
 		echo "let g:mail42 = '$username@student.42seoul.kr'" >> $HOME/.vimrc
-		source $HOME/.zshrc
+		source $HOME/.zshrc 2>/dev/null
+		echo "${LGREEN}Done :D${NC}"
 	else
 		echo "⚠️  ${LRED}invalid input, failed to set user and mail for 42header :(${NC} ⚠️ "
 	fi
@@ -40,8 +41,8 @@ else
 fi
 
 # install 42toolbox
-if [[ -x $HOME/42toolbox ]]; then
-        echo "${LCYAN}42toolbox already installed${NC}"
+if [[ -x "$(find ~ -type d -iname '42toolbox' 2>/dev/null)" ]]; then
+	echo "🛠  ${LCYAN}42toolbox already installed${NC}"
 else
 	read -n1 -p "${YELLOW}Do you want to install 42toolbox? (y/n)${NC} " input
 	echo ""
@@ -64,59 +65,67 @@ else
 fi
 
 # install brew
-rm -rf $HOME/goinfre/brew
-read -n1 -p "${YELLOW}If you want to change your dock, you have to install brew. Do you want to install brew? (y/n)${NC} " input
-echo ""
-if [ -n "$input" ] && [ "$input" = "y" ]; then
-	read -p "${YELLOW}Where do you want to install it? (g for goinfre / h for home / or insert the path${NC} ${LRED}[the folder will be created under your home directory]${NC}${YELLOW})${NC} " input
-	if [ -n "$input" ] && [ "$input" = "g" ]; then
-		brewPath="$HOME/goinfre"
-	elif [ -n "$input" ] && [ "$input" = "h" ]; then
-		brewPath="$HOME"
-	elif [ -n "$input" ]; then
-		brewPath="$HOME/$input"
+brewPath="$(brew --prefix 2>/dev/null)"
+if [[ -x $brewPath ]]; then
+	echo "⚙️  ${LCYAN}brew is already at here: ${NC}${W}$brewPath${NC}"
+else
+	read -n1 -p "${YELLOW}If you want to change your dock, you have to install brew. Do you want to install brew? (y/n)${NC} " input
+	echo ""
+	if [ -n "$input" ] && [ "$input" = "y" ]; then
+		read -p "${YELLOW}Where do you want to install it? (g for goinfre / h for home / or insert the path${NC} ${LRED}[the folder will be created under your home directory]${NC}${YELLOW})${NC} " input
+		if [ -n "$input" ] && [ "$input" = "g" ]; then
+			brewPath="$HOME/goinfre"
+		elif [ -n "$input" ] && [ "$input" = "h" ]; then
+			brewPath="$HOME"
+		elif [ -n "$input" ]; then
+			brewPath="$HOME/$input"
+		else
+			echo "⚠️  ${LRED}invalid path, exiting :(${NC} ⚠️ "
+			exit 1
+		fi
+		if [[ -x $brewPath/.brew ]]; then
+			echo "${LCYAN}brew already installed in${NC} ${W}$brewPath${NC}"
+		else
+			echo "💾 ${LCYAN}brew will be installed in${NC} ${W}$brewPath${NC} 💾"
+			#echo "export brewPath=${brewPath}" >> $HOME/.zshrc
+			git clone --depth=1 https://github.com/Homebrew/brew $brewPath/.brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc 2>/dev/null && brew update
+			brewPath="$(brew --prefix)"
+			source $HOME/.zshrc 2>/dev/null
+			echo "${LGREEN}Done :D${NC}"
+		fi
 	else
-		echo "⚠️  ${LRED}invalid path, exiting :(${NC} ⚠️ "
+   		echo "⚠️  ${LRED}brew not installed, exiting :(${NC} ⚠️ "
 		exit 1
 	fi
-	if [[ -x $brewPath/brew ]]; then
-		echo "${LCYAN}brew already installed in${NC} ${W}$brewPath${NC}"
-	else
-		echo "💾 ${LCYAN}brew will be installed in${NC} ${W}$brewPath${NC} 💾"
-		#echo "export brewPath=${brewPath}" >> $HOME/.zshrc
-		git clone --depth=1 https://github.com/Homebrew/brew $brewPath/brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
-		echo "${LGREEN}Done :D${NC}"
-	fi
-else
-   	echo "⚠️  ${LRED}brew not installed, exiting :(${NC} ⚠️ "
-	exit 1
 fi
+source $HOME/.zshrc 2>/dev/null
 
 # install tree
-if [[ -x $brewPath/brew/bin/tree ]]; then
-	echo "${LCYAN}tree already installed${NC}"
+if [[ -x "$(brew --prefix tree 2>/dev/null)" ]]; then
+	echo "🥕 ${LCYAN}tree already installed${NC}"
 else
 	read -n1 -p "${YELLOW}Do you want to install tree? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
 		brew install tree
+		source $HOME/.zshrc 2>/dev/null
 		echo "${LGREEN}Done :D${NC}"
-		source $HOME/.zshrc
 	else
 		echo "${LRED}tree not installed :(${NC}"
 	fi
 fi
 
 # [set dock](https://appleshare.it/posts/use-dockutil-in-a-script/)
-if [[ -x $brewPath/brew/bin/dockutil ]]; then
+dockPath="$(brew --prefix dockutil 2>/dev/null)"
+if [[ -x $dockPath ]]; then
 	echo "${LCYAN}dockutil already installed${NC}"
 else
 	read -n1 -p "${YELLOW}Do you want to install dockutil to change your dock? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
 		brew install dockutil
+		source $HOME/.zshrc 2>/dev/null
 		echo "${LGREEN}Done :D${NC}"
-		source $HOME/.zshrc
 	else
 		echo "${LRED}dockutil not installed :(${NC}"
 	fi
@@ -134,7 +143,7 @@ apps=(
 "${HOME}/Downloads"
 )
 
-if [[ -x $brewPath/brew/bin/dockutil ]]; then
+if [[ -x $dockPath ]]; then
 	# Create a clean Dock
 	dockutil --remove all --no-restart
 	echo "🧹 ${LGREEN}clean-out the Dock${NC}"
@@ -158,15 +167,28 @@ if [[ -x $brewPath/brew/bin/dockutil ]]; then
 	# uninstall dockutil
 	echo "${LGREEN}removing dockutil${NC}"
 	brew uninstall dockutil
+	source $HOME/.zshrc 2>/dev/null
 fi
 
 read -n1 -p "${YELLOW}Do you want to remove brew? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
-	rm -rf $brewPath/brew
+	rm -rf $brewPath
+	source $HOME/.zshrc 2>/dev/null
 	echo "${LGREEN}Done :D${NC}"
 else
 	echo "${LGREEN}OK :D${NC}"
 fi
 
+read -n1 -p "${YELLOW}Do you want to open vscode by \"code .\" command? (y/n)${NC} " input
+echo ""
+if [ -n "$input" ] && [ "$input" = "y" ]; then
+	echo "code () { VSCODE_CWD=\"\$PWD\" open -n -b \"com.microsoft.VSCode\" --args $* ;}" >> $HOME/.zshrc
+	source $HOME/.zshrc 2>/dev/null
+	echo "${LGREEN}Done :D${NC}"
+else
+	echo "${LGREEN}OK :D${NC}"
+fi
+
+source $HOME/.zshrc 2>/dev/null
 echo "🎉 ${LCYAN}Setting Finished ${NC}🎉"
