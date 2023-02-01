@@ -26,3 +26,4 @@ text="if [[ -z \$ZSH_THEME_CLOUD_PREFIX ]]; then\n\tZSH_THEME_CLOUD_PREFIX='â˜ï
 echo $text > $HOME/.oh-my-zsh/themes/cloud.zsh-theme
 sed -i -e 's/robbyrussell/cloud/g' $HOME/.zshrc
 source $HOME/.zshrc 2>/dev/null
+exec zsh -l
