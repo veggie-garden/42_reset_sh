@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2023/01/30 21:02:40 by cheseo           ###   ########.fr        #
+#    Updated: 2023/01/31 16:41:38 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ else
 			exit 1
 		fi
 		if [[ -x $brewPath/.brew ]]; then
+			echo "# brew" >> $HOME/.zshrc
 			echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc 2>/dev/null && brew update
 			echo "${LCYAN}brew already installed in${NC} ${W}$brewPath${NC}"
 		else

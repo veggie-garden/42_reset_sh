@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#/usr/bin/env zsh
 
 # **************************************************************************** #
 #                                                                              #
@@ -44,7 +44,7 @@ fi
 
 # install 42toolbox
 if [[ -x "$(find ~ -type d -iname '42toolbox' 2>/dev/null)" ]]; then
-        echo "🛠  ${LCYAN}42toolbox는 이미 설치되어 있습니다.${NC}"
+	 echo "🛠  ${LCYAN}42toolbox는 이미 설치되어 있습니다.${NC}"
 else
 	read -n1 -p "${YELLOW}42toolbox를 설치할까요? (y/n)${NC} " input
 	echo ""
@@ -86,6 +86,8 @@ else
 			exit 1
 		fi
 		if [[ -x $brewPath/.brew ]]; then
+			echo "# brew" >> $HOME/.zshrc
+			echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc 2>/dev/null && brew update
 			echo "${LCYAN}brew는 이미${NC} ${W}$brewPath${NC}에 설치되어 있습니다."
 		else
 			echo "💾 ${LCYAN}brew 위치: ${NC} ${W}$brewPath${NC} 💾"
@@ -93,7 +95,6 @@ else
 			echo "# brew" >> $HOME/.zshrc
 			git clone --depth=1 https://github.com/Homebrew/brew $brewPath/.brew && echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc 2>/dev/null && brew update
 			brewPath="$(brew --prefix)"
-			source $HOME/.zshrc 2>/dev/null
 			echo "${LGREEN}Done :D${NC}"
 		fi
 	else
@@ -101,6 +102,7 @@ else
 		exit 1
 	fi
 fi
+
 source $HOME/.zshrc 2>/dev/null
 
 # install tree
@@ -197,3 +199,4 @@ fi
 
 source $HOME/.zshrc 2>/dev/null
 echo "🎉 ${LCYAN}Setting Finished ${NC}🎉"
+exec zsh -l
