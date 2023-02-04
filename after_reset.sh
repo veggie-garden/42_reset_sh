@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2023/01/31 16:41:38 by cheseo           ###   ########.fr        #
+#    Updated: 2023/02/05 02:25:18 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,6 @@ W=$'\033[1;37m'
 NC=$'\033[0m'
 
 echo "${W}Welcome to is reset_sh${NC}🥕"
-
-# install oh_my_zsh
-read -n1 -p "${YELLOW}Do you want to install oh_my_zsh? (y/n)${NC} " input
-echo ""
-if [-n "$input" ] && [ "$input" = "y" ]; then
-	wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-	sed -i -e 's/"exec zsh -l"//g' install.sh
-	sh install.sh
-else
-	echo "${LRED}OK :(${NC}"
-fi
 
 # install 42 header
 read -n1 -p "${YELLOW}Do you want to change intra ID for header? (y/n)${NC} " input
@@ -186,6 +175,7 @@ if [[ -x $dockPath ]]; then
 	source $HOME/.zshrc 2>/dev/null
 fi
 
+# uninstall brew
 read -n1 -p "${YELLOW}Do you want to remove brew? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
@@ -196,6 +186,7 @@ else
 	echo "${LGREEN}OK :D${NC}"
 fi
 
+# run vscode in terminal
 read -n1 -p "${YELLOW}Do you want to open vscode by \"code .\" command? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
@@ -206,6 +197,17 @@ if [ -n "$input" ] && [ "$input" = "y" ]; then
 	echo "${LGREEN}Done :D${NC}"
 else
 	echo "${LGREEN}OK :D${NC}"
+fi
+
+# install oh_my_zsh
+read -n1 -p "${YELLOW}Do you want to install oh_my_zsh? (y/n)${NC} " input
+echo ""
+if [-n "$input" ] && [ "$input" = "y" ]; then
+	wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+	sed -i -e 's/exec zsh -l//g' install.sh
+	sh install.sh --keep-zshrc
+else
+	echo "${LRED}OK :(${NC}"
 fi
 
 source $HOME/.zshrc 2>/dev/null
