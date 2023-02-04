@@ -21,6 +21,17 @@ NC=$'\033[0m'
 
 echo "${W}Welcome to is reset_sh${NC}🥕"
 
+# install oh_my_zsh
+read -n1 -p "${YELLOW}Do you want to install oh_my_zsh? (y/n)${NC} " input
+echo ""
+if [-n "$input" ] && [ "$input" = "y" ]; then
+	wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+	sed -i -e 's/"exec zsh -l"//g' install.sh
+	sh install.sh
+else
+	echo "${LRED}OK :(${NC}"
+fi
+
 # install 42 header
 read -n1 -p "${YELLOW}Do you want to change intra ID for header? (y/n)${NC} " input
 echo ""
