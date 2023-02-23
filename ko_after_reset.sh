@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2023/01/30 15:47:17 by cheseo           ###   ########.fr        #
+#    Updated: 2023/02/23 16:33:16 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NC=$'\033[0m'
 
 echo "${W}Welcome to is reset_sh${NC}🥕"
 
-# install 42 header
+# 42 header setting
 read -n1 -p "${YELLOW}인트라 ID를 변경하고 싶습니까? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
@@ -49,8 +49,22 @@ else
 	read -n1 -p "${YELLOW}42toolbox를 설치할까요? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		git clone https://github.com/alexandregv/42toolbox.git ~/42toolbox
-		echo "${LGREEN}Done :D${NC}"
+		read -p "${YELLOW}어디에 설치할까요? (g for goinfre / h for home / 원하는 전체 경로를 입력하세요)${NC} " input
+		if [ -n "$input" ] && [ "$input" = "g" ]; then
+			toolPath="$HOME/goinfre"
+			git clone https://github.com/alexandregv/42toolbox.git $toolPath/42toolbox
+			echo "${LGREEN}Done :D${NC}"
+		elif [ -n "$input" ] && [ "$input" = "h" ]; then
+			toolPath="$HOME"
+			git clone https://github.com/alexandregv/42toolbox.git $toolPath/42toolbox
+			echo "${LGREEN}Done :D${NC}"
+		elif [ -n "$input" ]; then
+			toolPath="$input"
+			git clone https://github.com/alexandregv/42toolbox.git $toolPath/42toolbox
+			echo "${LGREEN}Done :D${NC}"
+		else
+			echo "⚠️  ${LRED}유효하지 않은 경로입니다. 42toolbox 설치에 실패했습니다. :(${NC} ⚠️ "
+		fi
 	else
 		echo "${LRED}42toolbox를 설치하지 않았습니다 :(${NC}"
 	fi
@@ -66,21 +80,44 @@ else
 	echo "${LRED}OK :(${NC}"
 fi
 
+read -n1 -p "${YELLOW}\"code .\" 명령어를 사용하시겠습니까? 터미널에서 vscode를 열어주는 명령어입니다. (y/n)${NC} " input
+echo ""
+if [ -n "$input" ] && [ "$input" = "y" ]; then
+	echo "" >> $HOME/.zshrc
+	echo "# run vscode in terminal" >> $HOME/.zshrc
+	echo "code () { VSCODE_CWD=\"\$PWD\" open -n -b \"com.microsoft.VSCode\" --args $* ;}" >> $HOME/.zshrc
+	source $HOME/.zshrc 2>/dev/null
+	echo "${LGREEN}Done :D${NC}"
+else
+	echo "${LGREEN}OK :D${NC}"
+fi
+
+# install oh_my_zsh
+read -n1 -p "${YELLOW}oh_my_zsh를 설치하겠습니까? (y/n)${NC} " input
+echo ""
+if [-n "$input" ] && [ "$input" = "y" ]; then
+	wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+	sed -i -e 's/exec zsh -l//g' install.sh
+	sh install.sh --keep-zshrc
+else
+	echo "${LRED}OK :(${NC}"
+fi
+
 # install brew
 brewPath="$(brew --prefix 2>/dev/null)"
 if [[ -x $brewPath ]]; then
-	echo "⚙️  ${LCYAN}brew is already at here: ${NC}${W}$brewPath${NC}"
+	echo "⚙️  ${LCYAN}brew가 이미 이 경로에 있습니다: ${NC}${W}$brewPath${NC}"
 else
 	read -n1 -p "${YELLOW}Dock을 변경하려면 brew를 설치해야 합니다. brew를 설치할까요? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		read -p "${YELLOW}어디에 저장할까요? (g for goinfre / h for home / 원하는 경로를 입력해주세요${NC} ${LRED}[홈 디렉토리에 생성됩니다]${NC}${YELLOW})${NC} " input
+		read -p "${YELLOW}어디에 설치할까요? (g for goinfre / h for home / 원하는 전체 경로를 입력하세요)${NC} " input
 		if [ -n "$input" ] && [ "$input" = "g" ]; then
 			brewPath="$HOME/goinfre"
 		elif [ -n "$input" ] && [ "$input" = "h" ]; then
 			brewPath="$HOME"
 		elif [ -n "$input" ]; then
-			brewPath="$HOME/$input"
+			brewPath="$input"
 		else
 			echo "⚠️  ${LRED}유효하지 않은 경로임으로 종료합니다 :(${NC} ⚠️ "
 			exit 1
@@ -136,7 +173,7 @@ else
 	fi
 fi
 
-# Change the path if you want more/less applications to be in your dock
+# dock setting을 변경하고 싶다면 여기를 변경하세요
 apps=(
 "/System/Applications/Launchpad.app"
 "/Applications/Google Chrome.app"
@@ -175,22 +212,11 @@ if [[ -x $dockPath ]]; then
 	source $HOME/.zshrc 2>/dev/null
 fi
 
+# brew 삭제
 read -n1 -p "${YELLOW}brew를 지우시겠습니까? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	rm -rf $brewPath
-	source $HOME/.zshrc 2>/dev/null
-	echo "${LGREEN}Done :D${NC}"
-else
-	echo "${LGREEN}OK :D${NC}"
-fi
-
-read -n1 -p "${YELLOW}\"code .\" 명령어를 사용하시겠습니까? 터미널에서 vscode를 열어주는 명령어입니다. (y/n)${NC} " input
-echo ""
-if [ -n "$input" ] && [ "$input" = "y" ]; then
-	echo "" >> $HOME/.zshrc
-	echo "# run vscode in terminal" >> $HOME/.zshrc
-	echo "code () { VSCODE_CWD=\"\$PWD\" open -n -b \"com.microsoft.VSCode\" --args $* ;}" >> $HOME/.zshrc
 	source $HOME/.zshrc 2>/dev/null
 	echo "${LGREEN}Done :D${NC}"
 else
