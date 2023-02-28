@@ -95,7 +95,7 @@ fi
 # install oh_my_zsh
 read -n1 -p "${YELLOW}oh_my_zsh를 설치하겠습니까? (y/n)${NC} " input
 echo ""
-if [-n "$input" ] && [ "$input" = "y" ]; then
+if [ -n "$input" ] && [ "$input" = "y" ]; then
 	wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 	sed -i -e 's/exec zsh -l//g' install.sh
 	sh install.sh --keep-zshrc
