@@ -19,7 +19,7 @@ YELLOW=$'\033[1;33m'
 W=$'\033[1;37m'
 NC=$'\033[0m'
 
-echo "${W}Welcome to is reset_sh${NC}🥕"
+echo "${W}Welcome to 42_reset_sh${NC}🥕"
 
 # 42 header setting
 read -n1 -p "${YELLOW}Do you want to change intra ID for header? (y/n)${NC} " input
