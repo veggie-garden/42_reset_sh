@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2023/02/23 15:06:28 by cheseo           ###   ########.fr        #
+#    Updated: 2023/03/17 20:36:10 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,11 @@ echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	read -p "${YELLOW}insert your intra ID:${NC} " username
 	if [ -n "$username" ]; then
+		sed -i -e '/# 42header setting/d' $HOME/.zshrc
+		sed -i -e '/export USER=/d' $HOME/.zshrc
+		sed -i -e '/export MAIL=/d' $HOME/.zshrc
+		sed -i -e '/let g:user42/d' $HOME/.vimrc
+		sed -i -e '/let g:mail42/d' $HOME/.vimrc
 		echo "" >> $HOME/.zshrc
 		echo "# 42header setting" >> $HOME/.zshrc
 		echo "export USER='$username'" >> $HOME/.zshrc
@@ -43,7 +48,7 @@ else
 fi
 
 # install 42toolbox
-if [[ -x "$(find ~ -type d -iname '42toolbox' 2>/dev/null)" ]]; then
+if [[ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]]; then
 	echo "🛠  ${LCYAN}42toolbox already installed${NC}"
 else
 	read -n1 -p "${YELLOW}Do you want to install 42toolbox? (y/n)${NC} " input

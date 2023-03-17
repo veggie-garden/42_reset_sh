@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2023/02/23 16:33:16 by cheseo           ###   ########.fr        #
+#    Updated: 2023/03/17 20:41:42 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,11 @@ echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	read -p "${YELLOW}인트라 ID를 입력해주세요:${NC} " username
 	if [ -n "$username" ]; then
+		sed -i -e '/# 42header setting/d' $HOME/.zshrc
+		sed -i -e '/export USER=/d' $HOME/.zshrc
+		sed -i -e '/export MAIL=/d' $HOME/.zshrc
+		sed -i -e '/let g:user42/d' $HOME/.vimrc
+		sed -i -e '/let g:mail42/d' $HOME/.vimrc
 		echo "" >> $HOME/.zshrc
 		echo "# 42header setting" >> $HOME/.zshrc
 		echo "export USER='$username'" >> $HOME/.zshrc
@@ -43,7 +48,7 @@ else
 fi
 
 # install 42toolbox
-if [[ -x "$(find ~ -type d -iname '42toolbox' 2>/dev/null)" ]]; then
+if [[ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]]; then
 	 echo "🛠  ${LCYAN}42toolbox는 이미 설치되어 있습니다.${NC}"
 else
 	read -n1 -p "${YELLOW}42toolbox를 설치할까요? (y/n)${NC} " input
@@ -80,6 +85,7 @@ else
 	echo "${LRED}OK :(${NC}"
 fi
 
+# run vscode in terminal
 read -n1 -p "${YELLOW}\"code .\" 명령어를 사용하시겠습니까? 터미널에서 vscode를 열어주는 명령어입니다. (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
