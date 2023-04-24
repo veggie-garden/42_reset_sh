@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2023/03/17 20:41:42 by cheseo           ###   ########.fr        #
+#    Updated: 2023/04/24 11:48:54 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,17 +21,21 @@ NC=$'\033[0m'
 
 echo "${W}Welcome to 42_reset_sh${NC}🥕"
 
+# install oh_my_zsh
+read -n1 -p "${YELLOW}oh_my_zsh를 설치하겠습니까? (y/n)${NC} " input_ohmyzsh
+echo ""
+if [ -n "$input_ohmyzsh" ] && [ "$input_ohmyzsh" = "y" ]; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+else
+	echo "${LRED}OK :(${NC}"
+fi
+
 # 42 header setting
 read -n1 -p "${YELLOW}인트라 ID를 변경하고 싶습니까? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	read -p "${YELLOW}인트라 ID를 입력해주세요:${NC} " username
 	if [ -n "$username" ]; then
-		sed -i -e '/# 42header setting/d' $HOME/.zshrc
-		sed -i -e '/export USER=/d' $HOME/.zshrc
-		sed -i -e '/export MAIL=/d' $HOME/.zshrc
-		sed -i -e '/let g:user42/d' $HOME/.vimrc
-		sed -i -e '/let g:mail42/d' $HOME/.vimrc
 		echo "" >> $HOME/.zshrc
 		echo "# 42header setting" >> $HOME/.zshrc
 		echo "export USER='$username'" >> $HOME/.zshrc
@@ -49,7 +53,7 @@ fi
 
 # install 42toolbox
 if [[ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]]; then
-	 echo "🛠  ${LCYAN}42toolbox는 이미 설치되어 있습니다.${NC}"
+	echo "🛠  ${LCYAN}42toolbox는 이미 설치되어 있습니다.${NC}"
 else
 	read -n1 -p "${YELLOW}42toolbox를 설치할까요? (y/n)${NC} " input
 	echo ""
@@ -91,22 +95,11 @@ echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	echo "" >> $HOME/.zshrc
 	echo "# run vscode in terminal" >> $HOME/.zshrc
-	echo "code () { VSCODE_CWD=\"\$PWD\" open -n -b \"com.microsoft.VSCode\" --args $* ;}" >> $HOME/.zshrc
+	echo "code () { VSCODE_CWD=\"\$PWD\" open -n -b \"com.microsoft.VSCode\" --args \$* ;}" >> $HOME/.zshrc
 	source $HOME/.zshrc 2>/dev/null
 	echo "${LGREEN}Done :D${NC}"
 else
 	echo "${LGREEN}OK :D${NC}"
-fi
-
-# install oh_my_zsh
-read -n1 -p "${YELLOW}oh_my_zsh를 설치하겠습니까? (y/n)${NC} " input
-echo ""
-if [ -n "$input" ] && [ "$input" = "y" ]; then
-	wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-	sed -i -e 's/exec zsh -l//g' install.sh
-	sh install.sh --keep-zshrc
-else
-	echo "${LRED}OK :(${NC}"
 fi
 
 # install brew
@@ -126,6 +119,9 @@ else
 			brewPath="$input"
 		else
 			echo "⚠️  ${LRED}유효하지 않은 경로임으로 종료합니다 :(${NC} ⚠️ "
+			if [ -n "$input_ohmyzsh" ] && ["$input_ohmyzsh" = "y"]; then
+				zsh
+			fi
 			exit 1
 		fi
 		if [[ -x $brewPath/.brew ]]; then
@@ -141,6 +137,9 @@ else
 			echo "${LGREEN}Done :D${NC}"
 		fi
 	else
+		if [ -n "$input_ohmyzsh" ] && ["$input_ohmyzsh" = "y"]; then
+			zsh
+		fi
 	   	echo "⚠️  ${LRED}brew가 설치되지 않았습니다. 종료합니다 :(${NC} ⚠️ "
 		exit 1
 	fi
@@ -229,6 +228,8 @@ else
 	echo "${LGREEN}OK :D${NC}"
 fi
 
-source $HOME/.zshrc 2>/dev/null
 echo "🎉 ${LCYAN}Setting Finished ${NC}🎉"
-exec zsh -l
+source $HOME/.zshrc 2>/dev/null
+if [ -n "$input_ohmyzsh" ] && [ "$input_ohmyzsh" = "y" ]; then
+	zsh
+fi
