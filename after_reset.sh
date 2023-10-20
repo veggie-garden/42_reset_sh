@@ -35,13 +35,14 @@ read -n1 -p "${YELLOW}Do you want to change intra ID for header? (y/n)${NC} " in
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	read -p "${YELLOW}insert your intra ID:${NC} " username
-	if [ -n "$username" ]; then
+	read -p "${YELLOW}insert your 42campus email (e.g. intraID@student.42seoul.kr):${NC} " email
+	if [ -n "$username" ] && [ -n "$email" ]; then
 		echo "" >> $HOME/.zshrc
 		echo "# 42header setting" >> $HOME/.zshrc
 		echo "export USER='$username'" >> $HOME/.zshrc
-		echo "export MAIL='$username@student.42seoul.kr'" >> $HOME/.zshrc
+		echo "export MAIL='$email'" >> $HOME/.zshrc
 		echo "let g:user42 = '$username'" >> $HOME/.vimrc
-		echo "let g:mail42 = '$username@student.42seoul.kr'" >> $HOME/.vimrc
+		echo "let g:mail42 = '$email'" >> $HOME/.vimrc
 		source $HOME/.zshrc 2>/dev/null
 		echo "${LGREEN}Done :D${NC}"
 	else
