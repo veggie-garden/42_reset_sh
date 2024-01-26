@@ -163,59 +163,16 @@ else
 	fi
 fi
 
-# [set dock](https://appleshare.it/posts/use-dockutil-in-a-script/)
-dockPath="$(brew --prefix dockutil 2>/dev/null)"
-if [[ -x $dockPath ]]; then
-	echo "${LCYAN}dockutil already installed${NC}"
-else
-	read -n1 -p "${YELLOW}Do you want to install dockutil to change your dock? (y/n)${NC} " input
-	echo ""
-	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		brew install dockutil
-		source $HOME/.zshrc 2>/dev/null
-		echo "${LGREEN}Done :D${NC}"
-	else
-		echo "${LRED}dockutil not installed :(${NC}"
-	fi
-fi
-
-# Change the path if you want more/less applications to be in your dock
-apps=(
-"/System/Applications/Launchpad.app"
-"/Applications/Google Chrome.app"
-"/Applications/Visual Studio Code.app"
-"/Applications/Slack.app"
-"/Applications/iTerm.app"
-"/System/Applications/Notes.app"
-"/System/Applications/System Preferences.app"
-"${HOME}/Downloads"
-)
-
-if [[ -x $dockPath ]]; then
-	# Create a clean Dock
-	dockutil --remove all --no-restart
-	echo "🧹 ${LGREEN}clean-out the Dock${NC}"
-
-	# Loop to check whether App is installed or not"
-	for app in "${apps[@]}";
-	do
-		if [[ -e ${app} ]]; then
-			dockutil --add "$app" --no-restart;
-		else
-			echo "${LRED}${app} not installed${NC}"
-		fi
-	done
-
-	# Kill dock to use new settings
-	killall -KILL Dock
+# [set dock](https://gist.github.com/kamui545/c810eccf6281b33a53e094484247f5e8)
+read -n1 -p "${YELLOW}Do you want to change your dock? (y/n)${NC} " input
+echo ""
+if [ -n "$input" ] && [ "$input" = "y" ]; then
+	echo "${W}Changing dock...${NC}"
+	./utils/dock.sh
 	echo "🏁 ${LGREEN}Restarted the Dock${NC}"
-
 	echo "🥳 ${LGREEN}Finished creating default Dock${NC} 🥳"
-
-	# uninstall dockutil
-	echo "${LGREEN}removing dockutil${NC}"
-	brew uninstall dockutil
-	source $HOME/.zshrc 2>/dev/null
+else
+	echo "${LGREEN}OK :)${NC}"
 fi
 
 # uninstall brew
