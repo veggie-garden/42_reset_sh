@@ -1,5 +1,4 @@
-#!/bin/bash
-# ./set_header.sh
+#!/usr/bin/env zsh
 
 LGREEN=$'\033[1;32m'
 NC=$'\033[0m'

@@ -1,4 +1,4 @@
-#/usr/bin/env zsh
+#!/usr/bin/env zsh
 
 pkill -u "${USER}" -f "^/System/Applications/System Preferences.app/Contents/MacOS/System Preferences$" 2>/dev/null
 
