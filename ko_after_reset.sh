@@ -52,7 +52,7 @@ else
 fi
 
 # install 42toolbox
-if [[ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]]; then
+if [ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]; then
 	echo "🛠  ${LCYAN}42toolbox는 이미 설치되어 있습니다.${NC}"
 else
 	read -n1 -p "${YELLOW}42toolbox를 설치할까요? (y/n)${NC} " input
@@ -104,7 +104,7 @@ fi
 
 # install brew
 brewPath="$(brew --prefix 2>/dev/null)"
-if [[ -x $brewPath ]]; then
+if [ -x $brewPath ]; then
 	echo "⚙️  ${LCYAN}brew가 이미 이 경로에 있습니다: ${NC}${W}$brewPath${NC}"
 else
 	read -n1 -p "${YELLOW}Dock을 변경하려면 brew를 설치해야 합니다. brew를 설치할까요? (y/n)${NC} " input
@@ -124,7 +124,7 @@ else
 			fi
 			exit 1
 		fi
-		if [[ -x $brewPath/.brew ]]; then
+		if [ -x $brewPath/.brew ]; then
 			echo "# brew" >> $HOME/.zshrc
 			echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc 2>/dev/null && brew update
 			echo "${LCYAN}brew는 이미${NC} ${W}$brewPath${NC}에 설치되어 있습니다."
@@ -140,17 +140,16 @@ else
 		if [ -n "$input_ohmyzsh" ] && ["$input_ohmyzsh" = "y"]; then
 			zsh
 		fi
-	   	echo "⚠️  ${LRED}brew가 설치되지 않았습니다. 종료합니다 :(${NC} ⚠️ "
-		exit 1
+	   	echo "${LRED}brew가 설치되지 않았습니다 :(${NC}"
 	fi
 fi
 
 source $HOME/.zshrc 2>/dev/null
 
 # install tree
-if [[ -x "$(brew --prefix tree 2>/dev/null)" ]]; then
+if [ -x "$(brew --prefix tree 2>/dev/null)" ]; then
 	echo "🥕 ${LCYAN}tree는 이미 설치되어 있습니다.${NC}"
-else
+elif [ -x $brewPath ]; then
 	read -n1 -p "${YELLOW}tree를 설치할까요? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
@@ -162,59 +161,16 @@ else
 	fi
 fi
 
-# [set dock](https://appleshare.it/posts/use-dockutil-in-a-script/)
-dockPath="$(brew --prefix dockutil 2>/dev/null)"
-if [[ -x $dockPath ]]; then
-	echo "${LCYAN}dockutil은 이미 설치되어 있습니다.${NC}"
-else
-	read -n1 -p "${YELLOW}dockutil을 설치할까요? dock을 변경하려면 설치해야 합니다 (y/n)${NC} " input
-	echo ""
-	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		brew install dockutil
-		source $HOME/.zshrc 2>/dev/null
-		echo "${LGREEN}Done :D${NC}"
-	else
-		echo "${LRED}dockutil이 설치되지 않았습니다 :(${NC}"
-	fi
-fi
-
-# dock setting을 변경하고 싶다면 여기를 변경하세요
-apps=(
-"/System/Applications/Launchpad.app"
-"/Applications/Google Chrome.app"
-"/Applications/Visual Studio Code.app"
-"/Applications/Slack.app"
-"/Applications/iTerm.app"
-"/System/Applications/Notes.app"
-"/System/Applications/System Preferences.app"
-"${HOME}/Downloads"
-)
-
-if [[ -x $dockPath ]]; then
-	# Create a clean Dock
-	dockutil --remove all --no-restart
-	echo "🧹 ${LGREEN}Dock 치우는 중${NC}"
-
-	# Loop to check whether App is installed or not"
-	for app in "${apps[@]}";
-	do
-		if [[ -e ${app} ]]; then
-			dockutil --add "$app" --no-restart;
-		else
-			echo "${LRED}${app}(은/는) 설치되어 있지 않습니다.${NC}"
-		fi
-	done
-
-	# Kill dock to use new settings
-	killall -KILL Dock
+# [set dock](https://gist.github.com/kamui545/c810eccf6281b33a53e094484247f5e8)
+read -n1 -p "${YELLOW}Dock을 변경하고 싶습니까? (y/n)${NC} " input
+echo ""
+if [ -n "$input" ] && [ "$input" = "y" ]; then
+	echo "${W}Dock 변경중...${NC}"
+	./utils/dock.sh
 	echo "🏁 ${LGREEN}Dock 재시작${NC}"
-
 	echo "🥳 ${LGREEN}Dock 변경 완료${NC} 🥳"
-
-	# uninstall dockutil
-	echo "${LGREEN}dockutil 삭제${NC}"
-	brew uninstall dockutil
-	source $HOME/.zshrc 2>/dev/null
+else
+	echo "${LGREEN}OK :)${NC}"
 fi
 
 # brew 삭제
