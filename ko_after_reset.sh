@@ -52,7 +52,7 @@ else
 fi
 
 # install 42toolbox
-if [ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]; then
+if [[ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]]; then
 	echo "🛠  ${LCYAN}42toolbox는 이미 설치되어 있습니다.${NC}"
 else
 	read -n1 -p "${YELLOW}42toolbox를 설치할까요? (y/n)${NC} " input
@@ -104,7 +104,7 @@ fi
 
 # install brew
 brewPath="$(brew --prefix 2>/dev/null)"
-if [ -x $brewPath ]; then
+if [[ -x $brewPath ]]; then
 	echo "⚙️  ${LCYAN}brew가 이미 이 경로에 있습니다: ${NC}${W}$brewPath${NC}"
 else
 	read -n1 -p "${YELLOW}Dock을 변경하려면 brew를 설치해야 합니다. brew를 설치할까요? (y/n)${NC} " input
@@ -124,7 +124,7 @@ else
 			fi
 			exit 1
 		fi
-		if [ -x $brewPath/.brew ]; then
+		if [[ -x $brewPath/.brew ]]; then
 			echo "# brew" >> $HOME/.zshrc
 			echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc 2>/dev/null && brew update
 			echo "${LCYAN}brew는 이미${NC} ${W}$brewPath${NC}에 설치되어 있습니다."
@@ -147,7 +147,7 @@ fi
 source $HOME/.zshrc 2>/dev/null
 
 # install tree
-if [ -x "$(brew --prefix tree 2>/dev/null)" ]; then
+if [[ -x "$(brew --prefix tree 2>/dev/null)" ]]; then
 	echo "🥕 ${LCYAN}tree는 이미 설치되어 있습니다.${NC}"
 elif [ -x $brewPath ]; then
 	read -n1 -p "${YELLOW}tree를 설치할까요? (y/n)${NC} " input

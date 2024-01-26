@@ -53,7 +53,7 @@ else
 fi
 
 # install 42toolbox
-if [ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]; then
+if [[ -x "$(find $HOME -type d -iname '42toolbox' 2>/dev/null)" ]]; then
 	echo "🛠  ${LCYAN}42toolbox already installed${NC}"
 else
 	read -n1 -p "${YELLOW}Do you want to install 42toolbox? (y/n)${NC} " input
@@ -105,7 +105,7 @@ fi
 
 # install brew
 brewPath="$(brew --prefix 2>/dev/null)"
-if [ -x $brewPath ]; then
+if [[ -x $brewPath ]]; then
 	echo "⚙️  ${LCYAN}brew is already at here: ${NC}${W}$brewPath${NC}"
 else
 	read -n1 -p "${YELLOW}If you want to change your dock, you have to install brew. Do you want to install brew? (y/n)${NC} " input
@@ -125,7 +125,7 @@ else
 			fi
 			exit 1
 		fi
-		if [ -x $brewPath/.brew ]; then
+		if [[ -x $brewPath/.brew ]]; then
 			echo "# brew" >> $HOME/.zshrc
 			echo "export brewPath=${brewPath}" >> $HOME/.zshrc && echo 'export PATH=$brewPath/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc 2>/dev/null && brew update
 			echo "${LCYAN}brew already installed in${NC} ${W}$brewPath${NC}"
@@ -148,7 +148,7 @@ fi
 source $HOME/.zshrc 2>/dev/null
 
 # install tree
-if [ -x "$(brew --prefix tree 2>/dev/null)" ]; then
+if [[ -x "$(brew --prefix tree 2>/dev/null)" ]]; then
 	echo "🥕 ${LCYAN}tree already installed${NC}"
 elif [ -x $brewPath ]; then
 	read -n1 -p "${YELLOW}Do you want to install tree? (y/n)${NC} " input
