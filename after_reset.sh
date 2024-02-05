@@ -108,7 +108,7 @@ brewPath="$(brew --prefix 2>/dev/null)"
 if [[ -x $brewPath ]]; then
 	echo "⚙️  ${LCYAN}brew is already at here: ${NC}${W}$brewPath${NC}"
 else
-	read -n1 -p "${YELLOW}If you want to change your dock, you have to install brew. Do you want to install brew? (y/n)${NC} " input
+	read -n1 -p "${YELLOW}Do you want to install brew? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
 		read -p "${YELLOW}Where do you want to install it? (g for goinfre / h for home / or insert the full path)${NC} " input
@@ -161,6 +161,8 @@ elif [ -x $brewPath ]; then
 		echo "${LRED}tree not installed :(${NC}"
 	fi
 fi
+
+source $HOME/.zshrc 2>/dev/null
 
 # [set dock](https://gist.github.com/kamui545/c810eccf6281b33a53e094484247f5e8)
 read -n1 -p "${YELLOW}Do you want to change your dock? (y/n)${NC} " input

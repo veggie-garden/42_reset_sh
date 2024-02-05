@@ -107,7 +107,7 @@ brewPath="$(brew --prefix 2>/dev/null)"
 if [[ -x $brewPath ]]; then
 	echo "⚙️  ${LCYAN}brew가 이미 이 경로에 있습니다: ${NC}${W}$brewPath${NC}"
 else
-	read -n1 -p "${YELLOW}Dock을 변경하려면 brew를 설치해야 합니다. brew를 설치할까요? (y/n)${NC} " input
+	read -n1 -p "${YELLOW}brew를 설치할까요? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
 		read -p "${YELLOW}어디에 설치할까요? (g for goinfre / h for home / 원하는 전체 경로를 입력하세요)${NC} " input
@@ -160,6 +160,8 @@ elif [ -x $brewPath ]; then
 		echo "${LRED}tree가 설치되지 않았습니다 :(${NC}"
 	fi
 fi
+
+source $HOME/.zshrc 2>/dev/null
 
 # [set dock](https://gist.github.com/kamui545/c810eccf6281b33a53e094484247f5e8)
 read -n1 -p "${YELLOW}Dock을 변경하고 싶습니까? (y/n)${NC} " input
