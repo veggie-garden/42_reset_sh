@@ -145,7 +145,6 @@ else
 	fi
 fi
 
-source $HOME/.zshrc 2>/dev/null
 
 # install tree
 if [[ -x "$(brew --prefix tree 2>/dev/null)" ]]; then
@@ -161,8 +160,6 @@ elif [ -x $brewPath ]; then
 		echo "${LRED}tree not installed :(${NC}"
 	fi
 fi
-
-source $HOME/.zshrc 2>/dev/null
 
 # [set dock](https://gist.github.com/kamui545/c810eccf6281b33a53e094484247f5e8)
 read -n1 -p "${YELLOW}Do you want to change your dock? (y/n)${NC} " input
@@ -180,7 +177,7 @@ fi
 read -n1 -p "${YELLOW}Do you want to remove brew? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
-	rm -rf $brewPath
+	rm -rf $brewPath/.brew
 	source $HOME/.zshrc 2>/dev/null
 	echo "${LGREEN}Done :D${NC}"
 else

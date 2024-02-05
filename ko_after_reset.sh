@@ -144,8 +144,6 @@ else
 	fi
 fi
 
-source $HOME/.zshrc 2>/dev/null
-
 # install tree
 if [[ -x "$(brew --prefix tree 2>/dev/null)" ]]; then
 	echo "🥕 ${LCYAN}tree는 이미 설치되어 있습니다.${NC}"
@@ -160,8 +158,6 @@ elif [ -x $brewPath ]; then
 		echo "${LRED}tree가 설치되지 않았습니다 :(${NC}"
 	fi
 fi
-
-source $HOME/.zshrc 2>/dev/null
 
 # [set dock](https://gist.github.com/kamui545/c810eccf6281b33a53e094484247f5e8)
 read -n1 -p "${YELLOW}Dock을 변경하고 싶습니까? (y/n)${NC} " input
@@ -179,7 +175,7 @@ fi
 read -n1 -p "${YELLOW}brew를 지우시겠습니까? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
-	rm -rf $brewPath
+	rm -rf $brewPath/.brew
 	source $HOME/.zshrc 2>/dev/null
 	echo "${LGREEN}Done :D${NC}"
 else
