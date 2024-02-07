@@ -52,7 +52,7 @@ else
 fi
 
 # github config setting
-read -n1 -p "${YELLOW}Do you want to set your GitHub config user.name and user.email? (y/n)${NC} " input
+read -n1 -p "${YELLOW}GitHub config의 user.name과 user.email을 변경하고 싶습니까? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	read -p "${YELLOW}GitHub user name:${NC} " username
