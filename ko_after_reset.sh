@@ -8,7 +8,7 @@
 #    By: cheseo <cheseo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:17:37 by cheseo            #+#    #+#              #
-#    Updated: 2024/01/26 21:32:48 by cheseo           ###   ########.fr        #
+#    Updated: 2024/02/07 19:52:42 by cheseo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,22 @@ if [ -n "$input" ] && [ "$input" = "y" ]; then
 		echo "${LGREEN}Done :D${NC}"
 	else
 		echo "⚠️  ${LRED}유효하지 않은 입력으로 헤더 설정에 실패했습니다 :(${NC} ⚠️ "
+	fi
+else
+	echo "${LRED}OK :(${NC}"
+fi
+
+# github config setting
+read -n1 -p "${YELLOW}Do you want to set your GitHub config user.name and user.email? (y/n)${NC} " input
+echo ""
+if [ -n "$input" ] && [ "$input" = "y" ]; then
+	read -p "${YELLOW}GitHub user name:${NC} " username
+	read -p "${YELLOW}GitHub user email:${NC} " useremail
+	if [ -n "$username" ] && [ -n "$useremail" ]; then
+		git config --global user.name "$username"
+		git config --global user.email "$useremail"
+	else
+		echo "⚠️  ${LRED}유효하지 않은 입력으로 GitHub config 설정에 실패했습니다 :(${NC} ⚠️ "
 	fi
 else
 	echo "${LRED}OK :(${NC}"
@@ -137,9 +153,6 @@ else
 			echo "${LGREEN}Done :D${NC}"
 		fi
 	else
-		if [ -n "$input_ohmyzsh" ] && ["$input_ohmyzsh" = "y"]; then
-			zsh
-		fi
 	   	echo "${LRED}brew가 설치되지 않았습니다 :(${NC}"
 	fi
 fi
