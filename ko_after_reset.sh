@@ -93,14 +93,18 @@ else
 	fi
 fi
 
-# ssh key reset
-read -n1 -p "${YELLOW}ssh키가 필요하신가요? (y/n)${NC} " input
-echo ""
-if [ -n "$input" ] && [ "$input" = "y" ]; then
-	./utils/ko_init_ssh.sh
-	echo "${LGREEN}Done :D${NC}"
+# ssh key
+if [ -f ~/.ssh/id_rsa ]; then
+	echo -e "${white}SSH key \`${LCYAN}~/.ssh/id_rsa${W}\`가 이미 존재합니다${NC}"
 else
-	echo "${LRED}OK :(${NC}"
+	read -n1 -p "${YELLOW}ssh키가 필요하신가요? (y/n)${NC} " input
+	echo ""
+	if [ -n "$input" ] && [ "$input" = "y" ]; then
+		./utils/ko_init_ssh.sh
+		echo "${LGREEN}Done :D${NC}"
+	else
+		echo "${LRED}OK :(${NC}"
+	fi
 fi
 
 # run vscode in terminal

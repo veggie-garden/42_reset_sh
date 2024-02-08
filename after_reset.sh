@@ -94,14 +94,18 @@ else
 	fi
 fi
 
-# ssh key reset
-read -n1 -p "${YELLOW}Do you need your ssh key? (y/n)${NC} " input
-echo ""
-if [ -n "$input" ] && [ "$input" = "y" ]; then
-	./utils/init_ssh.sh
-	echo "${LGREEN}Done :D${NC}"
+# ssh key
+if [ -f ~/.ssh/id_rsa ]; then
+	echo -e "${white}SSH key \`${LCYAN}~/.ssh/id_rsa${W}\` already exists, using it${NC}"
 else
-	echo "${LRED}OK :(${NC}"
+	read -n1 -p "${YELLOW}Do you need your ssh key? (y/n)${NC} " input
+	echo ""
+	if [ -n "$input" ] && [ "$input" = "y" ]; then
+		./utils/init_ssh.sh
+		echo "${LGREEN}Done :D${NC}"
+	else
+		echo "${LRED}OK :(${NC}"
+	fi
 fi
 
 # run vscode in terminal
