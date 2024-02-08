@@ -19,8 +19,6 @@ YELLOW=$'\033[1;33m'
 W=$'\033[1;37m'
 NC=$'\033[0m'
 
-echo "${W}Welcome to 42_reset_sh${NC}🥕"
-
 # install oh_my_zsh
 read -n1 -p "${YELLOW}oh_my_zsh를 설치하겠습니까? (y/n)${NC} " input_ohmyzsh
 echo ""
