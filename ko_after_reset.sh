@@ -197,10 +197,10 @@ else
 	echo "${LGREEN}OK :D${NC}"
 fi
 
-source $HOME/.zshrc 2>/dev/null
-if ! grep -q "alias 42_reset" "$HOME/.zshrc"; then
-	echo "alias 42_reset=\"https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/42_reset.sh\"" >> $HOME/.zshrc
+if ! grep -q "42_reset()" "$HOME/.zshrc"; then
+	echo "alias 42_reset='bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/42_reset.sh)\"'" >> $HOME/.zshrc
 fi
+source $HOME/.zshrc 2>/dev/null
 echo ""
 echo "                                          ██████                              "
 echo "                                        ██▒▒▒▒████                            "
