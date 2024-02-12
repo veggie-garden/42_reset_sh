@@ -25,10 +25,10 @@ echo "${W}Welcome to 42_reset_sh${NC}🥕"
 read -n1 -p "${YELLOW}Which language do you want? (e for English / k for Korean) (e/k)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "e" ]; then
-	./after_reset.sh
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/after_reset.sh)"
 elif [ -n "$input" ] && [ "$input" = "k" ]; then
-	./ko_after_reset.sh
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/ko_after_reset.sh)"
 else
 	echo "${LGREEN}Wrong input, automatically set to English${NC}"
-	./after_reset.sh
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/after_reset.sh)"
 fi
