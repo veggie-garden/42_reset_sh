@@ -23,7 +23,7 @@ NC=$'\033[0m'
 read -n1 -p "${YELLOW}oh_my_zsh를 설치하겠습니까? (y/n)${NC} " input_ohmyzsh
 echo ""
 if [ -n "$input_ohmyzsh" ] && [ "$input_ohmyzsh" = "y" ]; then
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 else
 	echo "${LRED}OK :(${NC}"
 fi
