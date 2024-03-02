@@ -28,4 +28,4 @@ sed -i -e 's/robbyrussell/cloud/g' $HOME/.zshrc
 source $HOME/.zshrc 2>/dev/null
 exec zsh -l
 
-# bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/setting_zsh.sh)"
+# zsh -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/setting_zsh.sh)"
