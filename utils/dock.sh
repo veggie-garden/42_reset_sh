@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "./utils/dock_functions.sh"
+source /dev/stdin <<< "$(curl -s https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/utils/dock_functions.sh)"
 
 # Change the path if you want more/less applications to be in your dock
 declare -a apps=(
