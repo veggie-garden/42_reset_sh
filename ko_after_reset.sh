@@ -100,7 +100,7 @@ else
 	read -n1 -p "${YELLOW}ssh키가 필요하신가요? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/utils/init_ssh.sh)"
+		bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/utils/ko_init_ssh.sh)"
 		echo "${LGREEN}Done :D${NC}"
 	else
 		echo "${LRED}OK :(${NC}"
