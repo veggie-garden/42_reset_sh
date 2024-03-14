@@ -101,7 +101,7 @@ else
 	read -n1 -p "${YELLOW}Do you need your ssh key? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		./utils/init_ssh.sh
+		bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/utils/init_ssh.sh)"
 		echo "${LGREEN}Done :D${NC}"
 	else
 		echo "${LRED}OK :(${NC}"
@@ -180,7 +180,7 @@ read -n1 -p "${YELLOW}Do you want to change your dock? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	echo "${W}Changing dock...${NC}"
-	./utils/dock.sh
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/utils/dock.sh)"
 	echo "🏁 ${LGREEN}Restarted the Dock${NC}"
 	echo "🥳 ${LGREEN}Finished creating default Dock${NC} 🥳"
 else
