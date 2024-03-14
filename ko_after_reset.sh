@@ -100,7 +100,7 @@ else
 	read -n1 -p "${YELLOW}ssh키가 필요하신가요? (y/n)${NC} " input
 	echo ""
 	if [ -n "$input" ] && [ "$input" = "y" ]; then
-		./utils/ko_init_ssh.sh
+		bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/utils/init_ssh.sh)"
 		echo "${LGREEN}Done :D${NC}"
 	else
 		echo "${LRED}OK :(${NC}"
@@ -179,7 +179,7 @@ read -n1 -p "${YELLOW}Dock을 변경하고 싶습니까? (y/n)${NC} " input
 echo ""
 if [ -n "$input" ] && [ "$input" = "y" ]; then
 	echo "${W}Dock 변경중...${NC}"
-	./utils/dock.sh
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/veggie-garden/42_reset_sh/main/utils/dock.sh)"
 	echo "🏁 ${LGREEN}Dock 재시작${NC}"
 	echo "🥳 ${LGREEN}Dock 변경 완료${NC} 🥳"
 else
